@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>BitRewardX</title>
+
+  <!-- Telegram Web App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <!-- TON Wallet Connect -->
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #22c55e;
+    }
+
+    .card {
+      background: #1e293b;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #22c55e;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>💰 BitRewardX</h1>
+
+  <!-- Points -->
+  <div class="card">
+    <h3>Points</h3>
+    <h2 id="score">0</h2>
+    <button onclick="tap()">Tap & Earn</button>
+  </div>
+
+  <!-- Task -->
+  <div class="card">
+    <h3>Tasks</h3>
+    <button onclick="task()">Complete Task (+10)</button>
+  </div>
+
+  <!-- Referral -->
+  <div class="card">
+    <h3>Referral</h3>
+    <button onclick="ref()">Invite Friend</button>
+  </div>
+
+  <!-- Wallet -->
+  <div class="card">
+    <h3>Wallet</h3>
+    <button onclick="connectWallet()">Connect Wallet</button>
+    <p id="walletAddress"></p>
+  </div>
+
+  <script>
+    let score = 0;
+
+    function tap() {
+      score++;
+      update();
+    }
+
+    function task() {
+      score += 10;
+      update();
+      alert("Task completed! +10 points");
+    }
+
+    function ref() {
+      alert("Referral system coming soon 😏");
+    }
+
+    function update() {
+      document.getElementById("score").innerText = score;
+    }
+
+    // Telegram expand
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    // TON Wallet Connect
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+      manifestUrl: "https://YOUR-USERNAME.github.io/cointap-app/tonconnect-manifest.json"
+    });
+
+    async function connectWallet() {
+      const wallet = await tonConnectUI.connectWallet();
+      document.getElementById("walletAddress").innerText =
+        "Connected: " + wallet.account.address.slice(0,6) + "...";
+    }
+
+  </script>
+
+</body>
+</html>
