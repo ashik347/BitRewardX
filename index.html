@@ -52,8 +52,7 @@
   <div class="card">
     <h3>Points</h3>
     <h2 id="score">0</h2>
-    <button onclick="tap()">Tap & Earn</button>
-  </div>
+    <button onclick="watchAdAndEarn()">Tap & Earn + Watch Ad</button>
 
   <!-- Task -->
   <div class="card">
@@ -111,6 +110,16 @@
         "Connected: " + wallet.account.address.slice(0,6) + "...";
     }
 
+function watchAdAndEarn() {
+    show_10925978().then(() => {
+        score += 100;
+        update();
+        alert('Congrats! You earned 100 points');
+    }).catch(() => {
+        alert('Ad failed. Try again later');
+    });
+}
+        
   </script>
 
 </body>
