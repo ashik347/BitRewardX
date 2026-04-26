@@ -110,7 +110,8 @@
         "Connected: " + wallet.account.address.slice(0,6) + "...";
     }
 
-function watchAdAndEarn() {
+   function watchAdAndEarn() {
+    alert('clicked');
     show_10925978().then(() => {
         score += 100;
         update();
@@ -118,7 +119,7 @@ function watchAdAndEarn() {
     }).catch(() => {
         alert('Ad failed. Try again later');
     });
-}       
+   } 
   </script>
 
 </body>
